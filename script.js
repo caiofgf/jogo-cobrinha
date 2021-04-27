@@ -39,7 +39,7 @@ function criaBG() {
 
 function criaSnake() {
     for(let i = 0; i < snake.length; i++) {
-        context.fillStyle = "green";
+        context.fillStyle = i == 0 ? "darkgreen" : "green";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
@@ -92,7 +92,17 @@ function aumentaPontos() {
     document.getElementById("pontos").innerHTML = `${pontos} pts`
 }
 
+function fimDeJogo() {
+    for(i = 1; i < snake.length; i++) {
+        if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            document.getElementById("alerta").innerHTML = "Fim de jogo!<br>Reinicie a página para jogar novamente"
+        }
+    }
+}
+
 function iniciarJogo() {
+    fimDeJogo();
     criaBG();
     criaSnake();
     criaComida();
@@ -107,7 +117,7 @@ function iniciarJogo() {
             else snakeY -= box;
             break;
         case "baixo":
-            if (snakeY + box > 16 * box) snakeY = 0;
+            if (snakeY + box > 15 * box) snakeY = 0;
             else snakeY += box;
             break;
         case "esquerda":
@@ -115,7 +125,7 @@ function iniciarJogo() {
             else snakeX -= box;
             break;
         case "direita":
-            if (snakeX + box > 16 * box) snakeX = 0;
+            if (snakeX + box > 15 * box) snakeX = 0;
             else snakeX += box;
             break;
     }

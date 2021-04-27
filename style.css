@@ -1,4 +1,5 @@
 body {
+    background-color: rgb(200, 228, 200);
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
@@ -14,5 +15,18 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 512px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#alerta {
+    text-align: center;
+    text-transform: to-uppercase;
+}
+
+#snake {
+    max-width: 512px;
+    max-height: 512px;
 }
 
