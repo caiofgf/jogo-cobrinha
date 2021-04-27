@@ -11,18 +11,42 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 };
-let direcao = "direita";
+let comida = {
+    x: 0, 
+    y: 0, 
+    redefineComida() {
+        do {
+            this.x = Math.floor(Math.random() * 15 + 1) * box;
+            this.y = Math.floor(Math.random() * 15 + 1) * box;
+        } while (this.haConflito());
+    },
+    haConflito() {
+        for (let i = 0; i < snake.length; i++) {
+            if (this.x == snake[i].x && this.y == snake[i].y) return true;
+        }
+        return false;
+    }
+}
+comida.redefineComida();
 
-function criarBG() {
+let direcao = "direita";
+let pontos = 0;
+
+function criaBG() {
     context.fillStyle = "lightgreen";
     context.fillRect(0, 0, 16 * box, 16 * box);
 }
 
-function criarSnake() {
+function criaSnake() {
     for(let i = 0; i < snake.length; i++) {
         context.fillStyle = "green";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
+}
+
+function criaComida() {
+    context.fillStyle = "red";
+    context.fillRect(comida.x, comida.y, box, box)
 }
 
 document.addEventListener('keydown', atualizar);
@@ -51,9 +75,28 @@ function atualizar(event) {
     }
 }
 
+function comeu() {
+    if (comida.x == snake[0].x && comida.y == snake[0].y) {
+        let newSnake = {
+            x: snake[snake.length-1].x,
+            y: snake[snake.length-1].y
+        }
+        snake.push(newSnake);
+        comida.redefineComida();
+        aumentaPontos();
+    }
+}
+
+function aumentaPontos() {
+    pontos++;
+    document.getElementById("pontos").innerHTML = `${pontos} pts`
+}
+
 function iniciarJogo() {
-    criarBG();
-    criarSnake();
+    criaBG();
+    criaSnake();
+    criaComida();
+    comeu();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
