@@ -32,6 +32,7 @@ comida.redefineComida();
 
 let direcao = "direita";
 let pontos = 0;
+let recorde = 0;
 
 function criaBG() {
     context.fillStyle = "lightgreen";
@@ -54,7 +55,6 @@ document.addEventListener('keydown', atualizar);
 
 function atualizar(event) {
     if (event.keyCode == TECLA_ESPACO) {
-        console.log("Apertou espaço");
         if (!jogo) {
             jogo = setInterval(iniciarJogo, 100);
         } else {
@@ -100,6 +100,10 @@ function comeu() {
 function aumentaPontos() {
     pontos++;
     document.getElementById("pontos").innerHTML = `${pontos} pts`
+    if (pontos > recorde) {
+        recorde = pontos;
+        document.getElementById("recorde").innerHTML = `Recorde: ${recorde} pts`;
+    }
 }
 
 function fimDeJogo() {
@@ -107,9 +111,22 @@ function fimDeJogo() {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
             jogo = null;
-            document.getElementById("alerta").innerHTML = "<span>Fim de jogo!</span><p>Reinicie a página para jogar novamente</p> <button type='button' id='btn-recarregar' onclick='document.location.reload()'>Recarregar página</button>"
+            document.getElementById("alerta").innerHTML = "<span>Fim de jogo!</span><button type='button' id='btn-recarregar' onclick='zeraJogo()'>Jogar novamente</button>"
         }
     }
+}
+
+function zeraJogo() {
+    snake = [];
+    snake[0] = {
+        x: 8 * box,
+        y: 8 * box
+    };
+    direcao = "direita";
+    pontos = 0;
+    document.getElementById("alerta").innerHTML = "";
+    document.getElementById("pontos").innerHTML = `${pontos} pts`;
+    jogo = setInterval(iniciarJogo, 100);
 }
 
 function iniciarJogo() {

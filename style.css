@@ -22,6 +22,15 @@ body {
     margin-right: auto;
 }
 
+.container .container {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container .container span {
+    display: block;
+}
+
 #alerta {
     text-align: center;
     text-transform: to-uppercase;
@@ -38,4 +47,9 @@ body {
 	border-radius: 10px;
 	border: 0px;
 	color: white;
+}
+
+.container span {
+    margin-left: 25px;
+    margin-right: 25px;
 }
