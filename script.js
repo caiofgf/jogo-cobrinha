@@ -96,7 +96,7 @@ function fimDeJogo() {
     for(i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
-            document.getElementById("alerta").innerHTML = "Fim de jogo!<br>Reinicie a página para jogar novamente"
+            document.getElementById("alerta").innerHTML = "<span>Fim de jogo!</span><p>Reinicie a página para jogar novamente</p> <button type='button' id='btn-recarregar' onclick='document.location.reload()'>Recarregar página</button>"
         }
     }
 }

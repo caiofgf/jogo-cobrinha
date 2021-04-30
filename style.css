@@ -32,3 +32,10 @@ body {
     max-height: 512px;
 }
 
+#btn-recarregar {
+	background-color: green;
+	padding: 15px;
+	border-radius: 10px;
+	border: 0px;
+	color: white;
+}
