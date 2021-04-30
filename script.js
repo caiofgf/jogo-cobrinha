@@ -34,6 +34,8 @@ let direcao = "direita";
 let pontos = 0;
 let recorde = 0;
 let fim = false;
+let somErro = new Audio('sound/fim.mp3');
+let somPonto = new Audio('sound/ponto.mp3');
 
 function criaBG() {
     context.fillStyle = "lightgreen";
@@ -95,6 +97,7 @@ function comeu() {
         snake.push(newSnake);
         comida.redefineComida();
         aumentaPontos();
+        somPonto.play();
     }
 }
 
@@ -110,6 +113,7 @@ function aumentaPontos() {
 function fimDeJogo() {
     for(i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            somErro.play();
             clearInterval(jogo);
             jogo = null;
             fim = true;
