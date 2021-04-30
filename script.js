@@ -2,6 +2,7 @@ const TECLA_ESQUERDA = 37;
 const TECLA_DIREITA = 39;
 const TECLA_CIMA = 38;
 const TECLA_BAIXO = 40;
+const TECLA_ESPACO = 32;
 
 let canvas = document.getElementById("snake");
 let context = canvas.getContext("2d");
@@ -52,6 +53,15 @@ function criaComida() {
 document.addEventListener('keydown', atualizar);
 
 function atualizar(event) {
+    if (event.keyCode == TECLA_ESPACO) {
+        console.log("Apertou espaço");
+        if (!jogo) {
+            jogo = setInterval(iniciarJogo, 100);
+        } else {
+            clearInterval(jogo);
+            jogo = null;
+        }
+    }
     if(snake.length > 1) {
         if(event.keyCode == TECLA_ESQUERDA && direcao != "direita") direcao = "esquerda";
         else if (event.keyCode == TECLA_DIREITA && direcao != "esquerda") direcao = "direita";
@@ -96,6 +106,7 @@ function fimDeJogo() {
     for(i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
+            jogo = null;
             document.getElementById("alerta").innerHTML = "<span>Fim de jogo!</span><p>Reinicie a página para jogar novamente</p> <button type='button' id='btn-recarregar' onclick='document.location.reload()'>Recarregar página</button>"
         }
     }
@@ -138,3 +149,4 @@ function iniciarJogo() {
 }
 
 let jogo = setInterval(iniciarJogo, 100);
+console.log(jogo);
