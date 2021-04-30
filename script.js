@@ -33,6 +33,7 @@ comida.redefineComida();
 let direcao = "direita";
 let pontos = 0;
 let recorde = 0;
+let fim = false;
 
 function criaBG() {
     context.fillStyle = "lightgreen";
@@ -54,7 +55,7 @@ function criaComida() {
 document.addEventListener('keydown', atualizar);
 
 function atualizar(event) {
-    if (event.keyCode == TECLA_ESPACO) {
+    if (event.keyCode == TECLA_ESPACO && !fim) {
         if (!jogo) {
             jogo = setInterval(iniciarJogo, 100);
         } else {
@@ -111,6 +112,7 @@ function fimDeJogo() {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
             jogo = null;
+            fim = true;
             document.getElementById("alerta").innerHTML = "<span>Fim de jogo!</span><button type='button' id='btn-recarregar' onclick='zeraJogo()'>Jogar novamente</button>"
         }
     }
@@ -126,6 +128,7 @@ function zeraJogo() {
     pontos = 0;
     document.getElementById("alerta").innerHTML = "";
     document.getElementById("pontos").innerHTML = `${pontos} pts`;
+    fim = false;
     jogo = setInterval(iniciarJogo, 100);
 }
 
